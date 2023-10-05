@@ -6,6 +6,5 @@
 
 void initGame()
 {
-	
-	/* something */	
+	initScreen();
 }

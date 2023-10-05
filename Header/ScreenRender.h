@@ -15,7 +15,15 @@ extern ScreenBuffer screenBuffer;
 
 void initScreen();
 void clearScreen();
+void releaseScreen();
 void swapScreenIndex();
+void setColor(ConsoleColor, ConsoleColor);
 void fillColorToScreen(ConsoleColor, ConsoleColor);
 void printString(char*, COORD, bool, bool);
-void releaseScreen();
+void printScreen(void (void));
+void printBattleScreen(int);
+
+/* Render Func */
+void renderString(char*, COORD);
+void renderBattleScreen(int);
+

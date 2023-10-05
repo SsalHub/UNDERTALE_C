@@ -5,24 +5,14 @@
 
 #include "./Header/BaseData.h" 
 #include "./Header/ScreenRender.h" 
+#include "./Header/PlayGame.h" 
 
 int main(int argc, char *argv[]) 
 {
-	COORD zero = {0, 0};
-	char hello[32] = "hello\n";
-	
+	COORD pos = { 5, _SCREEN_HEIGHT_ * 0.5 };
 	initGame();
-	initScreen();
 	
-	printString(hello, zero, true, true);
-	
-	while (1)
-	{
-		if (_kbhit())
-		{
-			break;
-		}
-	}	
+	playGame();
 		
 	return 0;
 }
