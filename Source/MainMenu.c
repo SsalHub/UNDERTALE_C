@@ -1,5 +1,7 @@
 #include "../Header/MainMenu.h"
 
+#include <conio.h>
+
 #include "../Header/UtilData.h"
 #include "../Header/BaseData.h"
 #include "../Header/PlayGame.h"
@@ -37,27 +39,30 @@ int runMainMenu()
 			input = _getch();
 			switch (input)
 			{
-				case _DOWN_:
-					if (selected + 1 < MAX_SELECT)
-						selected += 1;
-					
-					printMainMenuScreen(selected);
-					WaitForSeconds(0.1);
-					break;
 				case _UP_:
 					if (0 <= selected - 1)
 						selected -= 1;
-						
 					printMainMenuScreen(selected);
 					WaitForSeconds(0.1);
 					break;
+					
+				case _DOWN_:
+					if (selected + 1 < MAX_SELECT)
+						selected += 1;
+					printMainMenuScreen(selected);
+					WaitForSeconds(0.1);
+					break;
+					
 				case _SPACE_:
 				case _CARRIGE_RETURN_:
 					/* select ok */
 					return selected;
+					
 				default:
 					break;
 			}
 		}
 	}
+	
+	return -1;
 }

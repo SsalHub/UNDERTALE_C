@@ -6,8 +6,8 @@
 
 void test()
 {
-	system("hello");
-	exit(0);
+	system("hi");
+	printf("hello\n");
 }
 
 void initGame()

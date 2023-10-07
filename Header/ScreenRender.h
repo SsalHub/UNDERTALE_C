@@ -14,15 +14,15 @@ typedef struct ScreenBuffer
 	HANDLE buffer[2];
 } ScreenBuffer;
 
-typedef struct CurrentScreenInfo
+typedef struct ScreenInfo
 {
 	int width;
 	int height;
 	int areaForStrlen;
-} CurrentScreenInfo;
+} ScreenInfo;
 
 extern ScreenBuffer screenBuffer;
-extern CurrentScreenInfo currentScreenInfo;
+extern ScreenInfo screenInfo;
 
 /* Basic Screen Func */
 void initScreen();
@@ -41,6 +41,7 @@ void printBattleScreen(int, int);
 void renderString(char*, COORD);
 void renderMainMenuScreen(int);
 void renderTestScreen();
-void renderBattleExplositionBox(int);
+void renderBattleEnemy();
+void renderBattleExplainBox(int);
 void renderBattleChoiceBoxes(int);
 

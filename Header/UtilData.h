@@ -24,10 +24,13 @@ typedef enum InputType
 {
 	_SPACE_ 			= 32,
 	_ESCAPE_ 			= 27,
+	_CARRIGE_RETURN_ 	= 13,
+	
 	_LEFT_ 				= 75,
 	_RIGHT_ 			= 77,
 	_UP_ 				= 72,
 	_DOWN_ 				= 80,
+	
 	_UPPER_A_			= 65,
 	_UPPER_B_				, 
 	_UPPER_C_				, 
@@ -54,6 +57,7 @@ typedef enum InputType
 	_UPPER_X_				, 
 	_UPPER_Y_				, 
 	_UPPER_Z_				, 
+	
 	_LOWER_A_			= 97,
 	_LOWER_B_ 				,
 	_LOWER_C_ 				,
@@ -80,11 +84,8 @@ typedef enum InputType
 	_LOWER_X_ 				,
 	_LOWER_Y_ 				,
 	_LOWER_Z_ 				,
-	_CARRIGE_RETURN_ 	= 13,
+	
 } InputType;
 
 /* Equals like Sleep(int) or usleep(ms) */
 void WaitForSeconds(float s);
-
-/* Similar with strcat(char*, char*). But it repeats n times and returns dst's begin pos, or NULL. */
-char* strrptcat(char* dst, char* src, int repeat);

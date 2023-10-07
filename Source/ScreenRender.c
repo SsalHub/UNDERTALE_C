@@ -10,7 +10,7 @@
 #include "../Header/BaseData.h"
 
 ScreenBuffer screenBuffer;
-CurrentScreenInfo currentScreenInfo;
+ScreenInfo screenInfo;
 
 void initScreen()
 {
@@ -25,9 +25,9 @@ void initScreen()
 	screenBuffer.buffer[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	
 	GetConsoleScreenBufferInfo(_CURRENT_SCREEN_, &info);
-    currentScreenInfo.width = info.srWindow.Right - info.srWindow.Left + 1;
-    currentScreenInfo.height = info.srWindow.Bottom - info.srWindow.Top + 1;
-    currentScreenInfo.areaForStrlen = (currentScreenInfo.width + 1) * currentScreenInfo.height + 1;
+    screenInfo.width = info.srWindow.Right - info.srWindow.Left + 1;
+    screenInfo.height = info.srWindow.Bottom - info.srWindow.Top + 1;
+    screenInfo.areaForStrlen = (screenInfo.width + 1) * screenInfo.height + 1;
 
 	/* Cursor init */
 	CONSOLE_CURSOR_INFO cursor;
@@ -74,18 +74,18 @@ void fillColorToScreen(ConsoleColor bColor, ConsoleColor tColor)
 	char* bufferString;
 	int i, j, currIdx;
 	
-	bufferString = (char*)calloc(currentScreenInfo.areaForStrlen, sizeof(char));
+	bufferString = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	
 	SetConsoleCursorPosition(_CURRENT_SCREEN_, zero);
 	SetConsoleTextAttribute(_CURRENT_SCREEN_, tColor | (bColor << 4));
 	bufferString[0] = '\0';
-	for (i = 0; i < currentScreenInfo.height; i++)
+	for (i = 0; i < screenInfo.height; i++)
 	{
-		currIdx =  i * (currentScreenInfo.width + 1);
-		memset(bufferString+currIdx, ' ', currentScreenInfo.width * sizeof(char));
-		bufferString[currIdx+currentScreenInfo.width] = '\n';
+		currIdx =  i * (screenInfo.width + 1);
+		memset(bufferString+currIdx, ' ', screenInfo.width * sizeof(char));
+		bufferString[currIdx+screenInfo.width] = '\n';
 	}
-	bufferString[currentScreenInfo.areaForStrlen-1] = '\0';
+	bufferString[screenInfo.areaForStrlen-1] = '\0';
 	WriteFile(_CURRENT_SCREEN_, bufferString, strlen(bufferString), &dw, NULL);
 	
 	free(bufferString);
@@ -121,22 +121,23 @@ void printBattleScreen(int turn, int selected)
 	2. If action selected, render the action's screen.
 	*/
 	
+	renderBattleEnemy();
 	switch (selected)
 	{
 		case _FIGHT_:
-			renderBattleExplositionBox(turn);
+			renderBattleExplainBox(turn);
 			break;
 			
 		case _ACT_:
-			renderBattleExplositionBox(turn);
+			renderBattleExplainBox(turn);
 			break;
 			
 		case _ITEM_:
-			renderBattleExplositionBox(turn);
+			renderBattleExplainBox(turn);
 			break;
 			
 		case _MERCY_:
-			renderBattleExplositionBox(turn);
+			renderBattleExplainBox(turn);
 			break;
 			
 		case _FIGHT_ING_:
@@ -152,7 +153,6 @@ void printBattleScreen(int turn, int selected)
 			break;
 	}
 	renderBattleChoiceBoxes(selected);
-	
 	
 	SetConsoleActiveScreenBuffer(_CURRENT_SCREEN_);
 	swapScreenIndex();
@@ -191,21 +191,20 @@ void renderTestScreen()
 /* MainMenu */
 void renderMainMenuScreen(int selected)
 {
-	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tTitleColor = _BRIGHT_GRAY_, tLogoColor = _WHITE_, tSelColor = _YELLOW_;
-	COORD titlePos = { 0, currentScreenInfo.height * 0.36 };
+	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tTitleColor = _GRAY_, tLogoColor = _WHITE_, tSelColor = _YELLOW_;
+	COORD titlePos = { 0, screenInfo.height * 0.36 };
 	COORD contentPos[2], selectedPos;
 	DWORD dw;
 	char content[2][64], selectedChar[5] = "Ⅱ ";
 	char* title, nextLine;
-	int i, contentPosY = currentScreenInfo.height * 0.76;
+	int i, contentPosY = screenInfo.height * 0.76;
 	
-	title = (char*)calloc(currentScreenInfo.areaForStrlen, sizeof(char));
+	title = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	fillColorToScreen(bColor, tColor);
-	
 	
 	setColor(bColor, tLogoColor);
 	sprintf(title,     "$$\\   $$\\ $$\\   $$\\ $$$$$$$\\  $$$$$$$$\\ $$$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$\\       $$$$$$$$\\  ");
-	titlePos.X = (currentScreenInfo.width - strlen(title)) * 0.5;
+	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
 	sprintf(title, "%s\n$$ |  $$ |$$$\\  $$ |$$  __$$\\ $$  _____|$$  __$$\\\\__$$  __|$$  __$$\\ $$ |      $$  _____| ", title);
 	sprintf(title, "%s\n$$ |  $$ |$$$$\\ $$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ /  $$ |$$ |      $$ |       ", title);
 	sprintf(title, "%s\n$$ |  $$ |$$ $$\\$$ |$$ |  $$ |$$$$$\\    $$$$$$$  |  $$ |   $$$$$$$$ |$$ |      $$$$$\\     ", title);
@@ -217,15 +216,15 @@ void renderMainMenuScreen(int selected)
 	
 	setColor(bColor, tTitleColor);
 	sprintf(title, "19 Song JaeUk in Hansung Univ.");
-	titlePos.X = (currentScreenInfo.width - strlen(title)) * 0.5;
+	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
 	titlePos.Y += 10;
 	renderString(title, titlePos);
                  
 	sprintf(content[0], "Game Start");
-	contentPos[0].X = (currentScreenInfo.width - strlen(content[0])) * 0.5;
+	contentPos[0].X = (screenInfo.width - strlen(content[0])) * 0.5;
 	contentPos[0].Y = contentPosY;
 	sprintf(content[1], "Exit Game");
-	contentPos[1].X = (currentScreenInfo.width - strlen(content[1])) * 0.5;
+	contentPos[1].X = (screenInfo.width - strlen(content[1])) * 0.5;
 	contentPos[1].Y = contentPosY + 1;
 	
 	for (i = 0; i < 2; i++)
@@ -251,51 +250,111 @@ void renderMainMenuScreen(int selected)
 	free(title);
 }
 
-void renderBattleExplositionBox(int currTurn)
+void renderBattleEnemy()
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
-	COORD centerBoxPos = { currentScreenInfo.width * 0.76, currentScreenInfo.height * 0.4 };
+	COORD pos = { 0, screenInfo.height * 0.03 };
+	char* buffer;
+	char* pStr = buffer;
+	int slen, maxW = 0;
+	
+	buffer = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
+	
+	setColor(bColor, tColor);
+	buffer[0] = '\0'; 
+	strcat(buffer,   "                               .......... ");
+	strcat(buffer, "\n                           ..!############!.. ");
+	strcat(buffer, "\n                      ..!######################!... ");
+	strcat(buffer, "\n                    ..!##########################!.. ");
+	strcat(buffer, "\n                      ##!\"\"\"\"\"\"\"!####!\"\"\"\"\"\"\"\"\"### ");
+	strcat(buffer, "\n                       ##  ....   ##    ....   \"!# ");
+	strcat(buffer, "\n                     \"!.  \"\"   .#!\"\"!#..  \"\"  ..!\" ");
+	strcat(buffer, "\n                      \"##!--....##!  !##....\"\"#####\" ");
+	strcat(buffer, "\n                     !!\" \"!!###!!. -- .!!##!\"\"\"\"  \"\"\"##\" ");
+	strcat(buffer, "\n                     \"\"###..\"!!-.. .. ...-!!####!\" ...... ");
+	strcat(buffer, "\n                 ..#.  \"!##.!\"\"\"\"\" \"\" \"\"..-!##\"\"    .##!!\"\" ");
+	strcat(buffer, "\n               -\"##-..    \"\"\"\"\"\"\"!!##\"\"\"\"!\"!\"\"\"   ..=##!\"\" \"-.. ");
+	strcat(buffer, "\n             !       \"!#=.      -..##-..       .=#!\"..      \"\"-.. ");
+	strcat(buffer, "\n         .-\"\"      ## #!\"\"\"!-     \"###\"     -.!#\"\"\"   !       \"\"-.. ");
+	strcat(buffer, "\n         .-\"\"       !. ...!...! ..-___-..       ..=!   !       \"\"-.. ");
+	strcat(buffer, "\n        !##        !==\"  \"\" -.- .. !## !!.-   ...=!\"  !!        \"\"-.. ");
+	strcat(buffer, "\n        \"!-         !         !!  !## !..  ..=!\"      !!       \"\"-.. ");
+	strcat(buffer, "\n          \"!-..      !        !!  !## !..\"\"\"          !!      \"\"-.. ");
+	strcat(buffer, "\n             \"!-..!-..!-.     !!  !\"\" !..\"!    ......-!#\"...#-\" ");
+	strcat(buffer, "\n                 \"\"\"\" \"\" \" \"  \"           \"       \"\" \"\"  \"\"\"\"\" ");
+	strcat(buffer, "\n                   .--!  !!                ##!    -!! ");
+	strcat(buffer, "\n                  \" ! ##!!       .\"-.     ##!.      ! ");
+	strcat(buffer, "\n                 .!!\" !##\"       .!  \"!.   ###!      \"! ");
+	strcat(buffer, "\n                 !  !##         !\"\"  \"!.   \"\"##!     !!! ");
+	strcat(buffer, "\n                 !..!!!!\" .... !!   \"!. ......!!!! ...!! ");
+	strcat(buffer, "\n                      \"\"\"\"\"\"\"\"\"\"        \"\"\"\"\"\"\"\"\"\"\"\" ");
+	strcat(buffer, "\n                  ..-!#!-. \"!-.           .--#!\"\" .=!#!-. ");
+	strcat(buffer, "\n                \"\"!!##!-.. \"!...       ...-!!#--.. ..=!##!\" ");
+
+
+	
+	/* Get Enemy String's Max Width, and set position.X */
+	pStr = strtok(buffer, "\n");
+	while (pStr != NULL)
+	{
+		slen = strlen(pStr);
+		maxW = slen > maxW ? slen : maxW;
+		if (pStr != buffer) *(pStr - 1) = '\n';
+		pStr = strtok(NULL, "\n");
+	}
+	pos.X = (screenInfo.width - maxW) * 0.5;
+	
+	renderString(buffer, pos);
+	free(buffer);
+}
+
+void renderBattleExplainBox(int currTurn)
+{
+	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
+	const int CENTERBOX_WIDTH = screenInfo.width * 0.78, CENTERBOX_HEIGHT = screenInfo.height * 0.4;
+	COORD centerBoxPos = { (screenInfo.width - CENTERBOX_WIDTH) * 0.5, (screenInfo.height - CENTERBOX_HEIGHT) * 0.64 };
 	DWORD dw;
 	char* centerBox;
-	int i, lastIdx;
+	int i, j;
 	
-	centerBox = (char*)calloc((centerBoxPos.X + 1) * centerBoxPos.Y + 1, sizeof(char));
-	fillColorToScreen(bColor, tColor);
+	centerBox = (char*)calloc(CENTERBOX_WIDTH * CENTERBOX_HEIGHT * 1.5, sizeof(char));
 	
-	/* Center Box */
-	sprintf(centerBox,     "  旨");
-	lastIdx = strlen(centerBox);
-	strrptcat(centerBox, "收", centerBoxPos.X - 4);
+	/* Initialize Center Box */
+	setColor(bColor, tColor);
+	// Top Line
+	sprintf(centerBox, "旨");
+	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
+		strcat(centerBox, "收");
 	strcat(centerBox, "旬 ");
-	for (i = 0; i < centerBoxPos.Y - 2; i++)
+	// Mid Lines
+	for (i = 0; i < CENTERBOX_HEIGHT - 2; i++)
 	{
 		strcat(centerBox, "\n早");
-		lastIdx = strlen(centerBox);
-		strrptcat(centerBox, " ", centerBoxPos.X - 4);
+		for (j = 0; j < CENTERBOX_WIDTH - 2; j++)
+			strcat(centerBox, " ");
 		strcat(centerBox, "早 ");
 	}
+	// Bottom Line
 	strcat(centerBox, "\n曲");
-	lastIdx = strlen(centerBox);
-	strrptcat(centerBox, "收", centerBoxPos.X - 4);
+	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
+		strcat(centerBox, "收");
 	strcat(centerBox, "旭 ");
 	
 	renderString(centerBox, centerBoxPos);
-	
 	free(centerBox);
 }
 
 void renderBattleChoiceBoxes(int selected)
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tSelColor = _YELLOW_;
-	COORD choiceBoxPos = { currentScreenInfo.width * 0.17, currentScreenInfo.height * 0.8 };
+	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.88 };
 	DWORD dw;
 	char choiceBoxText[4][16] = { "∵ FIGHT", "Ⅷ ACT", "Ⅹ ITEM", "Ⅵ MERCY" };
 	char* choiceBox;	// char choiceBox[4][currentScreenInfo.width * 7]
 	int i, offset = 60;
 	
 	/* choiceBox[4][currentScreenInfo.width * 7] */
-	choiceBox = (char*)calloc(currentScreenInfo.width * 7, sizeof(char));
-	fillColorToScreen(bColor, tColor);
+	choiceBox = (char*)calloc(screenInfo.width * 7, sizeof(char));
 	
 	/* Initialize Chioce Boxes. */
 	for (i = 0; i < 4; i++)
@@ -314,6 +373,5 @@ void renderBattleChoiceBoxes(int selected)
 		renderString(choiceBox, choiceBoxPos);
 		choiceBoxPos.X += offset;
 	}
-	
 	free(choiceBox);
 }
