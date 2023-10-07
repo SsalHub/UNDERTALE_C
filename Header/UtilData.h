@@ -83,4 +83,8 @@ typedef enum InputType
 	_CARRIGE_RETURN_ 	= 13,
 } InputType;
 
+/* Equals like Sleep(int) or usleep(ms) */
 void WaitForSeconds(float s);
+
+/* Similar with strcat(char*, char*). But it repeats n times and returns dst's begin pos, or NULL. */
+char* strrptcat(char* dst, char* src, int repeat);

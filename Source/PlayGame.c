@@ -2,18 +2,28 @@
 
 #include <stdio.h>
 #include <conio.h>
+#include <time.h>
 
 #include "../Header/BaseData.h"
 #include "../Header/ScreenRender.h"
 
 void playGame()
 {
+	battle();
+}
+
+void battle()
+{
+	const int REFRESH_DELAY = 3;
+	time_t refresh;
 	char input;
-	int selected;
+	int turn, selected;
 	
+	turn = 0;
 	selected = 0;
 	
-	printBattleScreen(selected);
+	printBattleScreen(turn, selected);
+	refresh = clock();
 	while (1)
 	{
 		if (_kbhit())
@@ -26,7 +36,8 @@ void playGame()
 				case _LEFT_:
 					if (0 < selected)
 						selected--;
-					printBattleScreen(selected);
+					printBattleScreen(turn, selected);
+					refresh = clock();
 					break;
 					
 				case _UPPER_D_:
@@ -34,10 +45,17 @@ void playGame()
 				case _RIGHT_:
 					if (selected + 1 < 4)
 						selected++;
-					printBattleScreen(selected);
+					printBattleScreen(turn, selected);
+					refresh = clock();
 					break;
 			}
 		}
 		
+		/* Refresh screen every 3.0sec if there was no changes. */
+		if (REFRESH_DELAY < clock() - refresh)
+		{
+			printBattleScreen(turn, selected);
+			refresh = clock();
+		}
 	}
 }
