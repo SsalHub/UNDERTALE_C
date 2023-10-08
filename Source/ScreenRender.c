@@ -203,16 +203,17 @@ void renderMainMenuScreen(int selected)
 	fillColorToScreen(bColor, tColor);
 	
 	setColor(bColor, tLogoColor);
-	sprintf(title,     "$$\\   $$\\ $$\\   $$\\ $$$$$$$\\  $$$$$$$$\\ $$$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$\\       $$$$$$$$\\  ");
-	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
-	sprintf(title, "%s\n$$ |  $$ |$$$\\  $$ |$$  __$$\\ $$  _____|$$  __$$\\\\__$$  __|$$  __$$\\ $$ |      $$  _____| ", title);
-	sprintf(title, "%s\n$$ |  $$ |$$$$\\ $$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ /  $$ |$$ |      $$ |       ", title);
-	sprintf(title, "%s\n$$ |  $$ |$$ $$\\$$ |$$ |  $$ |$$$$$\\    $$$$$$$  |  $$ |   $$$$$$$$ |$$ |      $$$$$\\     ", title);
-	sprintf(title, "%s\n$$ |  $$ |$$ \\$$$$ |$$ |  $$ |$$  __|   $$  __$$<   $$ |   $$  __$$ |$$ |      $$  __|    ", title);
-	sprintf(title, "%s\n$$ |  $$ |$$ |\\$$$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ |  $$ |$$ |      $$ |       ", title);
-	sprintf(title, "%s\n\\$$$$$$  |$$ | \\$$ |$$$$$$$  |$$$$$$$$\\ $$ |  $$ |  $$ |   $$ |  $$ |$$$$$$$$\\ $$$$$$$$\\  ", title);
-	sprintf(title, "%s\n \\______/ \\__|  \\__|\\_______/ \\________|\\__|  \\__|  \\__|   \\__|  \\__|\\________|\\________| ", title);
-	renderString(title, titlePos);
+	titlePos.X = (screenInfo.width - strlen(strtok(importants[_IMPR_UNDERTALE_LOGO_], '\n'))) * 0.5;
+//	sprintf(title,     "$$\\   $$\\ $$\\   $$\\ $$$$$$$\\  $$$$$$$$\\ $$$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$\\       $$$$$$$$\\  ");
+//	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
+//	sprintf(title, "%s\n$$ |  $$ |$$$\\  $$ |$$  __$$\\ $$  _____|$$  __$$\\\\__$$  __|$$  __$$\\ $$ |      $$  _____| ", title);
+//	sprintf(title, "%s\n$$ |  $$ |$$$$\\ $$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ /  $$ |$$ |      $$ |       ", title);
+//	sprintf(title, "%s\n$$ |  $$ |$$ $$\\$$ |$$ |  $$ |$$$$$\\    $$$$$$$  |  $$ |   $$$$$$$$ |$$ |      $$$$$\\     ", title);
+//	sprintf(title, "%s\n$$ |  $$ |$$ \\$$$$ |$$ |  $$ |$$  __|   $$  __$$<   $$ |   $$  __$$ |$$ |      $$  __|    ", title);
+//	sprintf(title, "%s\n$$ |  $$ |$$ |\\$$$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ |  $$ |$$ |      $$ |       ", title);
+//	sprintf(title, "%s\n\\$$$$$$  |$$ | \\$$ |$$$$$$$  |$$$$$$$$\\ $$ |  $$ |  $$ |   $$ |  $$ |$$$$$$$$\\ $$$$$$$$\\  ", title);
+//	sprintf(title, "%s\n \\______/ \\__|  \\__|\\_______/ \\________|\\__|  \\__|  \\__|   \\__|  \\__|\\________|\\________| ", title);
+	renderString(importants[_IMPR_UNDERTALE_LOGO_], titlePos);
 	
 	setColor(bColor, tTitleColor);
 	sprintf(title, "19 Song JaeUk in Hansung Univ.");
@@ -255,15 +256,10 @@ void renderBattleEnemy()
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
 	COORD pos = { 0, screenInfo.height * 0.03 };
 	char fname[32] ;
-	char* buffer;
-	char* pStr = buffer;
 	int slen, maxW = 0;
 	
-	buffer = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	
 	setColor(bColor, tColor);
-	sprintf(fname, "Sans.block");
-	loadImage(buffer, fname);
 	
 //	strcat(buffer,   "                               .......... ");
 //	strcat(buffer, "\n                           ..!############!.. ");
@@ -307,8 +303,7 @@ void renderBattleEnemy()
 //	pos.X = (screenInfo.width - maxW) * 0.5;
 	pos.X = screenInfo.width * 0.3;
 	
-	renderString(buffer, pos);
-	free(buffer);
+	renderString(importants[_IMPR_SANS_], pos);
 }
 
 void renderBattleExplainBox(int currTurn)
