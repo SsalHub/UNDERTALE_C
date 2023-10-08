@@ -262,47 +262,69 @@ void renderBattleEnemy()
 	
 	setColor(bColor, tColor);
 	buffer[0] = '\0'; 
-	strcat(buffer,   "                               .......... ");
-	strcat(buffer, "\n                           ..!############!.. ");
-	strcat(buffer, "\n                      ..!######################!... ");
-	strcat(buffer, "\n                    ..!##########################!.. ");
-	strcat(buffer, "\n                      ##!\"\"\"\"\"\"\"!####!\"\"\"\"\"\"\"\"\"### ");
-	strcat(buffer, "\n                       ##  ....   ##    ....   \"!# ");
-	strcat(buffer, "\n                     \"!.  \"\"   .#!\"\"!#..  \"\"  ..!\" ");
-	strcat(buffer, "\n                      \"##!--....##!  !##....\"\"#####\" ");
-	strcat(buffer, "\n                     !!\" \"!!###!!. -- .!!##!\"\"\"\"  \"\"\"##\" ");
-	strcat(buffer, "\n                     \"\"###..\"!!-.. .. ...-!!####!\" ...... ");
-	strcat(buffer, "\n                 ..#.  \"!##.!\"\"\"\"\" \"\" \"\"..-!##\"\"    .##!!\"\" ");
-	strcat(buffer, "\n               -\"##-..    \"\"\"\"\"\"\"!!##\"\"\"\"!\"!\"\"\"   ..=##!\"\" \"-.. ");
-	strcat(buffer, "\n             !       \"!#=.      -..##-..       .=#!\"..      \"\"-.. ");
-	strcat(buffer, "\n         .-\"\"      ## #!\"\"\"!-     \"###\"     -.!#\"\"\"   !       \"\"-.. ");
-	strcat(buffer, "\n         .-\"\"       !. ...!...! ..-___-..       ..=!   !       \"\"-.. ");
-	strcat(buffer, "\n        !##        !==\"  \"\" -.- .. !## !!.-   ...=!\"  !!        \"\"-.. ");
-	strcat(buffer, "\n        \"!-         !         !!  !## !..  ..=!\"      !!       \"\"-.. ");
-	strcat(buffer, "\n          \"!-..      !        !!  !## !..\"\"\"          !!      \"\"-.. ");
-	strcat(buffer, "\n             \"!-..!-..!-.     !!  !\"\" !..\"!    ......-!#\"...#-\" ");
-	strcat(buffer, "\n                 \"\"\"\" \"\" \" \"  \"           \"       \"\" \"\"  \"\"\"\"\" ");
-	strcat(buffer, "\n                   .--!  !!                ##!    -!! ");
-	strcat(buffer, "\n                  \" ! ##!!       .\"-.     ##!.      ! ");
-	strcat(buffer, "\n                 .!!\" !##\"       .!  \"!.   ###!      \"! ");
-	strcat(buffer, "\n                 !  !##         !\"\"  \"!.   \"\"##!     !!! ");
-	strcat(buffer, "\n                 !..!!!!\" .... !!   \"!. ......!!!! ...!! ");
-	strcat(buffer, "\n                      \"\"\"\"\"\"\"\"\"\"        \"\"\"\"\"\"\"\"\"\"\"\" ");
-	strcat(buffer, "\n                  ..-!#!-. \"!-.           .--#!\"\" .=!#!-. ");
-	strcat(buffer, "\n                \"\"!!##!-.. \"!...       ...-!!#--.. ..=!##!\" ");
+//	strcat(buffer,   "                               .......... ");
+//	strcat(buffer, "\n                           ..!############!.. ");
+//	strcat(buffer, "\n                      ..!######################!... ");
+//	strcat(buffer, "\n                    ..!##########################!.. ");
+//	strcat(buffer, "\n                      ##!\"\"\"\"\"\"\"!####!\"\"\"\"\"\"\"\"\"### ");
+//	strcat(buffer, "\n                       ##  ....   ##    ....   \"!# ");
+//	strcat(buffer, "\n                     \"!.  \"\"   .#!\"\"!#..  \"\"  ..!\" ");
+//	strcat(buffer, "\n                      \"##!--....##!  !##....\"\"#####\" ");
+//	strcat(buffer, "\n                     !!\" \"!!###!!. -- .!!##!\"\"\"\"  \"\"\"##\" ");
+//	strcat(buffer, "\n                     \"\"###..\"!!-.. .. ...-!!####!\" ...... ");
+//	strcat(buffer, "\n                 ..#.  \"!##.!\"\"\"\"\" \"\" \"\"..-!##\"\"    .##!!\"\" ");
+//	strcat(buffer, "\n               -\"##-..    \"\"\"\"\"\"\"!!##\"\"\"\"!\"!\"\"\"   ..=##!\"\" \"-.. ");
+//	strcat(buffer, "\n             !       \"!#=.      -..##-..       .=#!\"..      \"\"-.. ");
+//	strcat(buffer, "\n         .-\"\"      ## #!\"\"\"!-     \"###\"     -.!#\"\"\"   !       \"\"-.. ");
+//	strcat(buffer, "\n         .-\"\"       !. ...!...! ..-___-..       ..=!   !       \"\"-.. ");
+//	strcat(buffer, "\n        !##        !==\"  \"\" -.- .. !## !!.-   ...=!\"  !!        \"\"-.. ");
+//	strcat(buffer, "\n        \"!-         !         !!  !## !..  ..=!\"      !!       \"\"-.. ");
+//	strcat(buffer, "\n          \"!-..      !        !!  !## !..\"\"\"          !!      \"\"-.. ");
+//	strcat(buffer, "\n             \"!-..!-..!-.     !!  !\"\" !..\"!    ......-!#\"...#-\" ");
+//	strcat(buffer, "\n                 \"\"\"\" \"\" \" \"  \"           \"       \"\" \"\"  \"\"\"\"\" ");
+//	strcat(buffer, "\n                   .--!  !!                ##!    -!! ");
+//	strcat(buffer, "\n                  \" ! ##!!       .\"-.     ##!.      ! ");
+//	strcat(buffer, "\n                 .!!\" !##\"       .!  \"!.   ###!      \"! ");
+//	strcat(buffer, "\n                 !  !##         !\"\"  \"!.   \"\"##!     !!! ");
+//	strcat(buffer, "\n                 !..!!!!\" .... !!   \"!. ......!!!! ...!! ");
+//	strcat(buffer, "\n                      \"\"\"\"\"\"\"\"\"\"        \"\"\"\"\"\"\"\"\"\"\"\" ");
+//	strcat(buffer, "\n                  ..-!#!-. \"!-.           .--#!\"\" .=!#!-. ");
+//	strcat(buffer, "\n                \"\"!!##!-.. \"!...       ...-!!#--.. ..=!##!\" ");
+
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 180, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 190, 226, 163, 191, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 191, 226, 160, 139, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 185, 226, 163, 134, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 160, 226, 163, 191, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 184, 226, 163, 167, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 182, 226, 163, 166, 226, 161, 128, 226, 160, 153, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 130, 226, 160, 136, 226, 160, 153, 226, 160, 155, 226, 162, 182, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 160, 226, 160, 138, 226, 160, 128, 226, 160, 128, 226, 163, 180, 226, 160, 128, 226, 160, 128, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 161, 132, 226, 160, 128, 226, 162, 160, 226, 160, 129, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 191, 226, 161, 128, 226, 163, 128, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 161, 135, 226, 160, 176, 226, 162, 191, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 160, 226, 161, 137, 226, 160, 137, 226, 160, 128, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 131, 226, 160, 128, 226, 160, 136, 226, 160, 179, 226, 163, 132, 226, 161, 128, 226, 162, 184, 226, 161, 135, 226, 160, 128, 226, 160, 128, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 136, 226, 160, 131, 226, 160, 152, 226, 163, 183, 226, 163, 164, 226, 160, 128, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 136, 226, 160, 137, 226, 160, 137, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 176, 226, 160, 128, 226, 162, 160, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 152, 226, 162, 128, 226, 163, 156, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 135, 226, 162, 184, 226, 163, 191, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 153, 226, 160, 155, 226, 160, 139, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 180, 226, 163, 182, 226, 163, 166, 226, 163, 132, 226 );
+	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 184, 226, 160, 191, 226, 160, 191, 226, 160, 191, 226, 160, 191, 226, 160 );
 
 
-	
 	/* Get Enemy String's Max Width, and set position.X */
-	pStr = strtok(buffer, "\n");
-	while (pStr != NULL)
-	{
-		slen = strlen(pStr);
-		maxW = slen > maxW ? slen : maxW;
-		if (pStr != buffer) *(pStr - 1) = '\n';
-		pStr = strtok(NULL, "\n");
-	}
-	pos.X = (screenInfo.width - maxW) * 0.5;
+//	pStr = strtok(buffer, "\n");
+//	while (pStr != NULL)
+//	{
+//		slen = strlen(pStr);
+//		maxW = slen > maxW ? slen : maxW;
+//		if (pStr != buffer) *(pStr - 1) = '\n';
+//		pStr = strtok(NULL, "\n");
+//	}
+//	pos.X = (screenInfo.width - maxW) * 0.5;
+	pos.X = screenInfo.width * 0.3;
 	
 	renderString(buffer, pos);
 	free(buffer);
