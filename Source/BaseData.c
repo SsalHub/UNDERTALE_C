@@ -5,14 +5,9 @@
 #include <direct.h>
 #include <Windows.h>
 
-#include "../Header/BaseData.h"
+#include "../Header/MainMenu.h"
 #include "../Header/ScreenRender.h"
 #include "../Header/ExceptionHandler.h"
-
-
-
-char* importants[_IMPR_LEN_];
-
 
 /* Test Func */
 
@@ -22,38 +17,22 @@ void test()
 	printf("hello\n");
 }
 
-
-
 /* Game System Func */
 
 void initGame()
 {
 	initScreen();
-	initImportants();
 }
 
-void initImportants()
+void startGame()
 {
-	/* MUST IMPROVED TO NOT USING CONTINUROUS ARRAY. */
-	importants[_IMPR_UNDERTALE_LOGO_] = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
-	loadImage(importants[_IMPR_UNDERTALE_LOGO_], "UNDERTALE.logo");
-	importants[_IMPR_SANS_] = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
-	loadImage(importants[_IMPR_SANS_], "Sans.block");
-}
-
-void releaseImportants()
-{
-	free(importants[_IMPR_UNDERTALE_LOGO_]);
-	free(importants[_IMPR_SANS_]);
+	loadMainMenu();
 }
 
 void exitGame()
 {
-	releaseImportants();
 	exit(0);
 }
-
-
 
 /* Load DataFile Func */
 
@@ -61,7 +40,7 @@ void loadImage(char* dst, char* fname)
 {
 	
 	FILE *fp;
-	char rootPath[256];
+	char rootPath[512];
 	char* token, *buffer, *imagePath = rootPath;
 	int i, j, x, y;
 	

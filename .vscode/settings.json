@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "basedata.h": "c",
+        "screenrender.h": "c"
+    }
+}

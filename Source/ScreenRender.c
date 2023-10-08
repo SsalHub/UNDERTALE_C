@@ -3,11 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #include <stdbool.h>
-#include <Windows.h>
+#include <windows.h>
 
 #include "../Header/UtilData.h"
 #include "../Header/BaseData.h"
+#include "../Header/ExceptionHandler.h"
 
 ScreenBuffer screenBuffer;
 ScreenInfo screenInfo;
@@ -195,32 +197,31 @@ void renderMainMenuScreen(int selected)
 	COORD titlePos = { 0, screenInfo.height * 0.36 };
 	COORD contentPos[2], selectedPos;
 	DWORD dw;
-	char content[2][64], selectedChar[5] = ">";
-	char* title, nextLine;
+	char logoFName[32] = "UNDERTALE.logo";
+	char content[2][32];
+	char* title, *logo, *nextLine, *selectedChar;
 	int i, contentPosY = screenInfo.height * 0.76;
 	
-	title = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	fillColorToScreen(bColor, tColor);
+	title = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	
+	/* Render Logo */
 	setColor(bColor, tLogoColor);
-	titlePos.X = (screenInfo.width - strlen(strtok(importants[_IMPR_UNDERTALE_LOGO_], '\n'))) * 0.5;
-//	sprintf(title,     "$$\\   $$\\ $$\\   $$\\ $$$$$$$\\  $$$$$$$$\\ $$$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$\\       $$$$$$$$\\  ");
-//	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
-//	sprintf(title, "%s\n$$ |  $$ |$$$\\  $$ |$$  __$$\\ $$  _____|$$  __$$\\\\__$$  __|$$  __$$\\ $$ |      $$  _____| ", title);
-//	sprintf(title, "%s\n$$ |  $$ |$$$$\\ $$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ /  $$ |$$ |      $$ |       ", title);
-//	sprintf(title, "%s\n$$ |  $$ |$$ $$\\$$ |$$ |  $$ |$$$$$\\    $$$$$$$  |  $$ |   $$$$$$$$ |$$ |      $$$$$\\     ", title);
-//	sprintf(title, "%s\n$$ |  $$ |$$ \\$$$$ |$$ |  $$ |$$  __|   $$  __$$<   $$ |   $$  __$$ |$$ |      $$  __|    ", title);
-//	sprintf(title, "%s\n$$ |  $$ |$$ |\\$$$ |$$ |  $$ |$$ |      $$ |  $$ |  $$ |   $$ |  $$ |$$ |      $$ |       ", title);
-//	sprintf(title, "%s\n\\$$$$$$  |$$ | \\$$ |$$$$$$$  |$$$$$$$$\\ $$ |  $$ |  $$ |   $$ |  $$ |$$$$$$$$\\ $$$$$$$$\\  ", title);
-//	sprintf(title, "%s\n \\______/ \\__|  \\__|\\_______/ \\________|\\__|  \\__|  \\__|   \\__|  \\__|\\________|\\________| ", title);
-	renderString(importants[_IMPR_UNDERTALE_LOGO_], titlePos);
+	loadImage(title, logoFName);
+	nextLine = title;
+	while (nextLine != NULL && *nextLine != '\n') { nextLine++; }
+	/* If error */ if (nextLine == NULL) throwFatalException(_INVALID_DATA_FORMAT_);
+	titlePos.X = (screenInfo.width - (int)(nextLine - title)) * 0.5;
+	renderString(title, titlePos);
 	
+	/* Render Title */
 	setColor(bColor, tTitleColor);
 	sprintf(title, "19 Song JaeUk in Hansung Univ.");
 	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
 	titlePos.Y += 10;
 	renderString(title, titlePos);
-                 
+    
+    /* Render MainMeny Choices */
 	sprintf(content[0], "Game Start");
 	contentPos[0].X = (screenInfo.width - strlen(content[0])) * 0.5;
 	contentPos[0].Y = contentPosY;
@@ -244,6 +245,8 @@ void renderMainMenuScreen(int selected)
 		WriteFile(_CURRENT_SCREEN_, content[i], strlen(content[i]), &dw, NULL);
 	}
 	
+	selectedChar = title;
+	selectedChar[0] = '\0';
 	setColor(bColor, tSelColor);
 	SetConsoleCursorPosition(_CURRENT_SCREEN_, selectedPos);
 	WriteFile(_CURRENT_SCREEN_, selectedChar, strlen(selectedChar), &dw, NULL);
@@ -255,55 +258,29 @@ void renderBattleEnemy()
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
 	COORD pos = { 0, screenInfo.height * 0.03 };
-	char fname[32] ;
+	char enemyFName[32] = "SANS.block";
+	char* buffer, *prevLine, *nextLine;
 	int slen, maxW = 0;
 	
+	buffer = (char*)calloc(screenInfo.areaForStrlen * 0.7, sizeof(char));
 	
+	/* Render Enemy */
 	setColor(bColor, tColor);
-	
-//	strcat(buffer,   "                               .......... ");
-//	strcat(buffer, "\n                           ..!############!.. ");
-//	strcat(buffer, "\n                      ..!######################!... ");
-//	strcat(buffer, "\n                    ..!##########################!.. ");
-//	strcat(buffer, "\n                      ##!\"\"\"\"\"\"\"!####!\"\"\"\"\"\"\"\"\"### ");
-//	strcat(buffer, "\n                       ##  ....   ##    ....   \"!# ");
-//	strcat(buffer, "\n                     \"!.  \"\"   .#!\"\"!#..  \"\"  ..!\" ");
-//	strcat(buffer, "\n                      \"##!--....##!  !##....\"\"#####\" ");
-//	strcat(buffer, "\n                     !!\" \"!!###!!. -- .!!##!\"\"\"\"  \"\"\"##\" ");
-//	strcat(buffer, "\n                     \"\"###..\"!!-.. .. ...-!!####!\" ...... ");
-//	strcat(buffer, "\n                 ..#.  \"!##.!\"\"\"\"\" \"\" \"\"..-!##\"\"    .##!!\"\" ");
-//	strcat(buffer, "\n               -\"##-..    \"\"\"\"\"\"\"!!##\"\"\"\"!\"!\"\"\"   ..=##!\"\" \"-.. ");
-//	strcat(buffer, "\n             !       \"!#=.      -..##-..       .=#!\"..      \"\"-.. ");
-//	strcat(buffer, "\n         .-\"\"      ## #!\"\"\"!-     \"###\"     -.!#\"\"\"   !       \"\"-.. ");
-//	strcat(buffer, "\n         .-\"\"       !. ...!...! ..-___-..       ..=!   !       \"\"-.. ");
-//	strcat(buffer, "\n        !##        !==\"  \"\" -.- .. !## !!.-   ...=!\"  !!        \"\"-.. ");
-//	strcat(buffer, "\n        \"!-         !         !!  !## !..  ..=!\"      !!       \"\"-.. ");
-//	strcat(buffer, "\n          \"!-..      !        !!  !## !..\"\"\"          !!      \"\"-.. ");
-//	strcat(buffer, "\n             \"!-..!-..!-.     !!  !\"\" !..\"!    ......-!#\"...#-\" ");
-//	strcat(buffer, "\n                 \"\"\"\" \"\" \" \"  \"           \"       \"\" \"\"  \"\"\"\"\" ");
-//	strcat(buffer, "\n                   .--!  !!                ##!    -!! ");
-//	strcat(buffer, "\n                  \" ! ##!!       .\"-.     ##!.      ! ");
-//	strcat(buffer, "\n                 .!!\" !##\"       .!  \"!.   ###!      \"! ");
-//	strcat(buffer, "\n                 !  !##         !\"\"  \"!.   \"\"##!     !!! ");
-//	strcat(buffer, "\n                 !..!!!!\" .... !!   \"!. ......!!!! ...!! ");
-//	strcat(buffer, "\n                      \"\"\"\"\"\"\"\"\"\"        \"\"\"\"\"\"\"\"\"\"\"\" ");
-//	strcat(buffer, "\n                  ..-!#!-. \"!-.           .--#!\"\" .=!#!-. ");
-//	strcat(buffer, "\n                \"\"!!##!-.. \"!...       ...-!!#--.. ..=!##!\" ");
-
-
-	/* Get Enemy String's Max Width, and set position.X */
-//	pStr = strtok(buffer, "\n");
-//	while (pStr != NULL)
-//	{
-//		slen = strlen(pStr);
-//		maxW = slen > maxW ? slen : maxW;
-//		if (pStr != buffer) *(pStr - 1) = '\n';
-//		pStr = strtok(NULL, "\n");
-//	}
-//	pos.X = (screenInfo.width - maxW) * 0.5;
+	loadImage(buffer, enemyFName);
 	pos.X = screenInfo.width * 0.3;
-	
-	renderString(importants[_IMPR_SANS_], pos);
+	nextLine = buffer;
+	while (nextLine != NULL && *nextLine != '\0')
+	{
+		prevLine = nextLine;
+		while (nextLine != NULL && *nextLine != '\n') 
+		{
+			nextLine++;
+		}
+		maxW = (int)(nextLine - prevLine) < maxW ? maxW : (int)(nextLine - prevLine);
+		nextLine++;
+	}
+	pos.X = (screenInfo.width - maxW) * 0.5;
+	renderString(buffer, pos);
 }
 
 void renderBattleExplainBox(int currTurn)
@@ -348,7 +325,7 @@ void renderBattleChoiceBoxes(int selected)
 	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.88 };
 	DWORD dw;
 	char choiceBoxText[4][16] = { "√ FIGHT", "♣ ACT", "◈ ITEM", "♥ MERCY" };
-	char* choiceBox;	// char choiceBox[4][currentScreenInfo.width * 7]
+	char* choiceBox;
 	int i, offset = 60;
 	
 	/* choiceBox[4][currentScreenInfo.width * 7] */

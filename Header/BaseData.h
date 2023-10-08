@@ -1,16 +1,11 @@
 #pragma once
 
-#include "UtilData.h"
+#include "./UtilData.h"
 
-// 800 600, 800 450, 640 360, 480 270, 320 180
-#define 	_SCREEN_WIDTH_ 			800
-#define 	_SCREEN_HEIGHT_ 		600
+#define 	_SCREEN_WIDTH_ 			230
+#define 	_SCREEN_HEIGHT_ 		80
 #define		_FONT_WIDTH_			6
 #define		_FONT_HEIGHT_			12
-
-#define 	_IMPR_LEN_				5
-#define		_IMPR_UNDERTALE_LOGO_	0
-#define		_IMPR_SANS_				1
 
 typedef enum BattleChoiceType
 {
@@ -25,14 +20,12 @@ typedef enum BattleChoiceType
 	_MERCY_ING_,
 } BattleChoiceType;
 
-extern char* importants[_IMPR_LEN_];
 
 void test();
 
 /* Game System Func */
 void initGame();
-void initImportants();
-void releaseImportants();
+void startGame();
 void exitGame();
 
 /* Load DataFile Func */
