@@ -23,5 +23,9 @@ typedef enum BattleChoiceType
 
 void test();
 
+/* Game System Func */
 void initGame();
 void exitGame();
+
+/* Load DataFile Func */
+void loadImage(char*, char*);

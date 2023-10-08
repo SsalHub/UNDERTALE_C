@@ -195,7 +195,7 @@ void renderMainMenuScreen(int selected)
 	COORD titlePos = { 0, screenInfo.height * 0.36 };
 	COORD contentPos[2], selectedPos;
 	DWORD dw;
-	char content[2][64], selectedChar[5] = "¢∫ ";
+	char content[2][64], selectedChar[5] = ">";
 	char* title, nextLine;
 	int i, contentPosY = screenInfo.height * 0.76;
 	
@@ -254,6 +254,7 @@ void renderBattleEnemy()
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
 	COORD pos = { 0, screenInfo.height * 0.03 };
+	char fname[32] ;
 	char* buffer;
 	char* pStr = buffer;
 	int slen, maxW = 0;
@@ -261,7 +262,9 @@ void renderBattleEnemy()
 	buffer = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	
 	setColor(bColor, tColor);
-	buffer[0] = '\0'; 
+	sprintf(fname, "Sans.block");
+	loadImage(buffer, fname);
+	
 //	strcat(buffer,   "                               .......... ");
 //	strcat(buffer, "\n                           ..!############!.. ");
 //	strcat(buffer, "\n                      ..!######################!... ");
@@ -290,28 +293,6 @@ void renderBattleEnemy()
 //	strcat(buffer, "\n                      \"\"\"\"\"\"\"\"\"\"        \"\"\"\"\"\"\"\"\"\"\"\" ");
 //	strcat(buffer, "\n                  ..-!#!-. \"!-.           .--#!\"\" .=!#!-. ");
 //	strcat(buffer, "\n                \"\"!!##!-.. \"!...       ...-!!#--.. ..=!##!\" ");
-
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 180, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 190, 226, 163, 191, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 191, 226, 160, 139, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 185, 226, 163, 134, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 160, 226, 163, 191, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 184, 226, 163, 167, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 182, 226, 163, 166, 226, 161, 128, 226, 160, 153, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 130, 226, 160, 136, 226, 160, 153, 226, 160, 155, 226, 162, 182, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 160, 226, 160, 138, 226, 160, 128, 226, 160, 128, 226, 163, 180, 226, 160, 128, 226, 160, 128, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 161, 132, 226, 160, 128, 226, 162, 160, 226, 160, 129, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 163, 191, 226, 161, 128, 226, 163, 128, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 161, 135, 226, 160, 176, 226, 162, 191, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 160, 226, 161, 137, 226, 160, 137, 226, 160, 128, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 131, 226, 160, 128, 226, 160, 136, 226, 160, 179, 226, 163, 132, 226, 161, 128, 226, 162, 184, 226, 161, 135, 226, 160, 128, 226, 160, 128, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 136, 226, 160, 131, 226, 160, 152, 226, 163, 183, 226, 163, 164, 226, 160, 128, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 136, 226, 160, 137, 226, 160, 137, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 176, 226, 160, 128, 226, 162, 160, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 152, 226, 162, 128, 226, 163, 156, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 161, 135, 226, 162, 184, 226, 163, 191, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 153, 226, 160, 155, 226, 160, 139, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 162, 128, 226, 163, 180, 226, 163, 182, 226, 163, 166, 226, 163, 132, 226 );
-	sprintf("%c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c %c%c%c \n", 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 128, 226, 160, 184, 226, 160, 191, 226, 160, 191, 226, 160, 191, 226, 160, 191, 226, 160 );
 
 
 	/* Get Enemy String's Max Width, and set position.X */
@@ -344,23 +325,23 @@ void renderBattleExplainBox(int currTurn)
 	/* Initialize Center Box */
 	setColor(bColor, tColor);
 	// Top Line
-	sprintf(centerBox, "¶Æ");
+	sprintf(centerBox, "‚îè");
 	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
-		strcat(centerBox, "¶¨");
-	strcat(centerBox, "¶Ø ");
+		strcat(centerBox, "‚îÅ");
+	strcat(centerBox, "‚îì ");
 	// Mid Lines
 	for (i = 0; i < CENTERBOX_HEIGHT - 2; i++)
 	{
-		strcat(centerBox, "\n¶≠");
+		strcat(centerBox, "\n‚îÉ");
 		for (j = 0; j < CENTERBOX_WIDTH - 2; j++)
 			strcat(centerBox, " ");
-		strcat(centerBox, "¶≠ ");
+		strcat(centerBox, "‚îÉ ");
 	}
 	// Bottom Line
-	strcat(centerBox, "\n¶±");
+	strcat(centerBox, "\n‚îó");
 	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
-		strcat(centerBox, "¶¨");
-	strcat(centerBox, "¶∞ ");
+		strcat(centerBox, "‚îÅ");
+	strcat(centerBox, "‚îõ ");
 	
 	renderString(centerBox, centerBoxPos);
 	free(centerBox);
@@ -371,7 +352,7 @@ void renderBattleChoiceBoxes(int selected)
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tSelColor = _YELLOW_;
 	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.88 };
 	DWORD dw;
-	char choiceBoxText[4][16] = { "°Ó FIGHT", "¢¿ ACT", "¢¬ ITEM", "¢æ MERCY" };
+	char choiceBoxText[4][16] = { "‚àö FIGHT", "‚ô£ ACT", "‚óà ITEM", "‚ô• MERCY" };
 	char* choiceBox;	// char choiceBox[4][currentScreenInfo.width * 7]
 	int i, offset = 60;
 	
@@ -386,11 +367,11 @@ void renderBattleChoiceBoxes(int selected)
 		else
 			setColor(bColor, tColor);
 			
-		sprintf(choiceBox,     "¶Æ¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶Ø ");
-		sprintf(choiceBox, "%s\n¶≠                                ¶≠ ", choiceBox);
-		sprintf(choiceBox, "%s\n¶≠            %-10s          ¶≠  ", choiceBox, choiceBoxText[i]);
-		sprintf(choiceBox, "%s\n¶≠                                ¶≠ ", choiceBox);
-		sprintf(choiceBox, "%s\n¶±¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶¨¶∞ ", choiceBox);
+		sprintf(choiceBox,     "‚îè‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îì ");
+		sprintf(choiceBox, "%s\n‚îÉ                                ‚îÉ ", choiceBox);
+		sprintf(choiceBox, "%s\n‚îÉ            %-10s          ‚îÉ  ", choiceBox, choiceBoxText[i]);
+		sprintf(choiceBox, "%s\n‚îÉ                                ‚îÉ ", choiceBox);
+		sprintf(choiceBox, "%s\n‚îó‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îÅ‚îõ ", choiceBox);
 		
 		renderString(choiceBox, choiceBoxPos);
 		choiceBoxPos.X += offset;
