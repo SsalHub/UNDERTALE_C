@@ -5,12 +5,12 @@ CC       = gcc.exe
 WINDRES  = windres.exe
 OBJ      = main.o Source/BaseData.o Source/ScreenRender.o Source/PlayGame.o Source/UtilData.o Source/MainMenu.o Source/ExceptionHandler.o
 LINKOBJ  = main.o Source/BaseData.o Source/ScreenRender.o Source/PlayGame.o Source/UtilData.o Source/MainMenu.o Source/ExceptionHandler.o
-LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/lib" -static-libgcc
+LIBS     = -L"C:/MinGW/lib" -static-libgcc
 INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include"
 CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++"
 BIN      = Undertale.exe
 CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS)
+CFLAGS   = $(INCS) -lkernel32
 ROOT 	:= $(CURDIR)
 
 ifdef ComSpec	# True, PowerShell
@@ -30,8 +30,7 @@ endif
 
 .PHONY: all all-before all-after clean clean-custom
 
-all: 
-	all-before $(BIN) all-after
+all: all-before $(BIN) all-after
 
 clean: clean-custom
 	$(RM_OBJ)

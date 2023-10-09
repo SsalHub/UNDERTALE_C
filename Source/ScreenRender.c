@@ -39,8 +39,8 @@ void initScreen()
 	font.nFont = 2;
     font.dwFontSize.X = _FONT_WIDTH_;
     font.dwFontSize.Y = _FONT_HEIGHT_;
-    SetCurrentConsoleFont(screenBuffer.buffer[0], false, &font);
-    SetCurrentConsoleFont(screenBuffer.buffer[1], false, &font);
+    SetCurrentConsoleFontEx(screenBuffer.buffer[0], false, &font);
+    SetCurrentConsoleFontEx(screenBuffer.buffer[1], false, &font);
 }
 
 void vibrateScreen()

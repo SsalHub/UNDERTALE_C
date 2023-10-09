@@ -9,29 +9,31 @@
     "tasks": [
         {
             "label": "Project Total Build",
-            "command": "mingw32-make all",
+            "command": "mingw32-make",
             "group": "build",
-            // "args": [
-            //     "/C",
-            //     "${workspaceRoot}"
-            // ]
+            "args": [
+                "all",
+                "/C",
+                "${workspaceRoot}"
+            ]
         },
         {
             "label": "Execute",
             "command": "${workspaceRoot}\\Undertale.exe",
             "group": "test",
-            // "args": [
-            //     "/C",
-            //     "${fileDirname}\\${fileBasenameNoExtension}"
-            // ]
+            "args": [
+                "/C",
+                "${fileDirname}\\${fileBasenameNoExtension}"
+            ]
         },
         {
             "label": "Clean Build",
-            "command": "mingw32-make clean",
-            // "args": [
-            //     "/C",
-            //     "${fileDirname}\\${fileBasenameNoExtension}"
-            // ]
+            "command": "mingw32-make",
+            "args": [
+                "clean",
+                "/C",
+                "${fileDirname}\\${fileBasenameNoExtension}"
+            ]
         },
         // {
         //     "label": "save and compile for C++",
