@@ -2,6 +2,12 @@
     "files.associations": {
         "stdlib.h": "c",
         "basedata.h": "c",
-        "screenrender.h": "c"
+        "screenrender.h": "c",
+        "stdbool.h": "c",
+        "utildata.h": "c",
+        "exceptionhandler.h": "c",
+        "windows.h": "c",
+        "playgame.h": "c",
+        "mainmenu.h": "c"
     }
 }

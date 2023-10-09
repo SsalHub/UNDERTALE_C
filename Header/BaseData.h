@@ -1,6 +1,16 @@
 #pragma once
 
-#include "./UtilData.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <direct.h>
+#include <Windows.h>
+
+#include "UtilData.h"
+#include "MainMenu.h"
+#include "ScreenRender.h"
+#include "ExceptionHandler.h"
+
 
 #define 	_SCREEN_WIDTH_ 			230
 #define 	_SCREEN_HEIGHT_ 		80

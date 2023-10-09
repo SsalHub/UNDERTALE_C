@@ -1,10 +1,16 @@
 #pragma once
 
 #include <stdbool.h>
-#include <Windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <wchar.h>
+#include <stdbool.h>
+#include <windows.h>
+#include <Wincon.h>
 
-#include "UtilData.h"
 #include "BaseData.h"
+#include "ExceptionHandler.h"
 
 #define _CURRENT_SCREEN_ screenBuffer.buffer[screenBuffer.currentIndex]
 
@@ -26,6 +32,7 @@ extern ScreenInfo screenInfo;
 
 /* Basic Screen Func */
 void initScreen();
+void vibrateScreen();
 void clearScreen();
 void releaseScreen();
 void swapScreenIndex();

@@ -1,5 +1,10 @@
 #pragma once
 
+#include <stdio.h>
+#include <windows.h>
+
+#include "BaseData.h"
+
 typedef enum ExceptionType
 {
 	_UNKNOWN_EXCEPTION_,

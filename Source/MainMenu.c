@@ -1,12 +1,5 @@
 #include "../Header/MainMenu.h"
 
-#include <conio.h>
-
-#include "../Header/UtilData.h"
-#include "../Header/BaseData.h"
-#include "../Header/PlayGame.h"
-#include "../Header/ExceptionHandler.h"
-
 void loadMainMenu()
 {
 	int idx = runMainMenu();

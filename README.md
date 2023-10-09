@@ -27,7 +27,7 @@
 
 3. Now we are in a PowerShell window. 
    Copy&Paste following command, and check tool version.
-        3-1. GCC version '6.3.0-1'.     (GCC == Clang compiler)
+        3-1. GCC version 'MinGW 6.3.0-1'.     (GCC == Clang compiler, please use MinGW - not TDM)
             command) gcc --version 
         3-2. mingw32-make version is 'GNU Make 3.82.90'.
             command) mingw32-make --version

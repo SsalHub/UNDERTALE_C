@@ -1,12 +1,5 @@
 #include "../Header/PlayGame.h"
 
-#include <stdio.h>
-#include <conio.h>
-#include <time.h>
-
-#include "../Header/BaseData.h"
-#include "../Header/ScreenRender.h"
-
 void playGame()
 {
 	battle();

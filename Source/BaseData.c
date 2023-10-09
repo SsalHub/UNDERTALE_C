@@ -1,14 +1,5 @@
 #include "../Header/BaseData.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <direct.h>
-#include <Windows.h>
-
-#include "../Header/MainMenu.h"
-#include "../Header/ScreenRender.h"
-#include "../Header/ExceptionHandler.h"
-
 /* Test Func */
 
 void test()
@@ -22,6 +13,7 @@ void test()
 void initGame()
 {
 	initScreen();
+	MoveWindow(_CURRENT_SCREEN_, 2, 2, screenInfo.width, screenInfo.height, true);
 }
 
 void startGame()

@@ -1,15 +1,9 @@
 #include "../Header/ScreenRender.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <wchar.h>
-#include <stdbool.h>
-#include <windows.h>
-
-#include "../Header/UtilData.h"
-#include "../Header/BaseData.h"
-#include "../Header/ExceptionHandler.h"
+#ifndef CONSOLE_WINDOWED_MODE
+#define CONSOLE_FULLSCREEN_MODE 	1
+#define CONSOLE_WINDOWED_MODE 		2
+#endif
 
 ScreenBuffer screenBuffer;
 ScreenInfo screenInfo;
@@ -25,7 +19,9 @@ void initScreen()
 	screenBuffer.currentIndex = 0;
 	screenBuffer.buffer[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	screenBuffer.buffer[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	
+	SetConsoleDisplayMode(screenBuffer.buffer[0], CONSOLE_WINDOWED_MODE, 0);
+	SetConsoleDisplayMode(screenBuffer.buffer[1], CONSOLE_WINDOWED_MODE, 0);
+
 	GetConsoleScreenBufferInfo(_CURRENT_SCREEN_, &info);
     screenInfo.width = info.srWindow.Right - info.srWindow.Left + 1;
     screenInfo.height = info.srWindow.Bottom - info.srWindow.Top + 1;
@@ -39,13 +35,39 @@ void initScreen()
 	SetConsoleCursorInfo(screenBuffer.buffer[1], &cursor);
 	
 	/* Font init */
-	CONSOLE_FONT_INFOEX font;
-	font.cbSize = sizeof(font);
+	CONSOLE_FONT_INFO font;
 	font.nFont = 2;
     font.dwFontSize.X = _FONT_WIDTH_;
     font.dwFontSize.Y = _FONT_HEIGHT_;
-    SetCurrentConsoleFontEx(screenBuffer.buffer[0], false, &font);
-    SetCurrentConsoleFontEx(screenBuffer.buffer[1], false, &font);
+    SetCurrentConsoleFont(screenBuffer.buffer[0], false, &font);
+    SetCurrentConsoleFont(screenBuffer.buffer[1], false, &font);
+}
+
+void vibrateScreen()
+{
+	RECT currWindowRectPos;
+	COORD currWindowPos;
+	GetWindowRect(_CURRENT_SCREEN_, &currWindowRectPos);
+	currWindowPos.X = currWindowRectPos.left;	// top left's X
+	currWindowPos.Y = currWindowRectPos.top;	// top left's Y
+
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X+1, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X+1, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	WaitForSeconds(0.02);
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X-2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X-2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	WaitForSeconds(0.02);
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X+2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X+2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	WaitForSeconds(0.02);
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X-2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X-2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	WaitForSeconds(0.02);
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X+2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X+2, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	WaitForSeconds(0.02);
+	MoveWindow(screenBuffer.buffer[0], currWindowPos.X-1, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
+	MoveWindow(screenBuffer.buffer[1], currWindowPos.X-1, currWindowPos.Y, screenInfo.width, screenInfo.height, true);
 }
 
 void clearScreen()	

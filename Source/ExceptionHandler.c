@@ -1,10 +1,5 @@
 #include "../Header/ExceptionHandler.h"
 
-#include <stdio.h>
-#include <Windows.h>
-
-#include "../Header/BaseData.h"
-
 void throwFatalException(ExceptionType e)
 {
 	switch (e)
