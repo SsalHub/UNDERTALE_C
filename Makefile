@@ -10,23 +10,24 @@ INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include"
 CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++"
 BIN      = Undertale.exe
 CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) -lkernel32
-ROOT 	:= $(CURDIR)
+CFLAGS   = $(INCS)
 
-ifdef ComSpec	# True, PowerShell
-# @powershell -File "$(ROOT)/Config/ShellConfig.ps1"
-	RM_OBJ := Remove-Item -Force -Recurse -Filter "*.o"
-	ifneq ($(wildcard $(BIN)),)
-		RM_BIN := Remove-Item -Force $(BIN)
-	endif
-else			# False, CommandPrompt
+# ifdef ComSpec	# True, PowerShell
+# # @powershell -File "$(ROOT)/Config/ShellConfig.ps1"
+# 	RM_OBJ := Remove-Item -Force -Recurse -Filter "*.o"
+# 	ifneq ($(wildcard $(BIN)),)
+# 		RM_BIN := Remove-Item -Force $(BIN)
+# 	endif
+# else			# False, CommandPrompt
 # @call $(ROOT)/Config/PromptConfig.ps1
-	RM_OBJ := for /r %i in (*.o) do del "%i"
-	ifneq ($(wildcard $(BIN)),)
-		RM_BIN := rm -rf $(BIN)
-	endif
+RM_OBJ := for /r %i in (*.o) do del "%i"
+ifneq ($(wildcard $(BIN)),)
+	RM_BIN := rm -rf $(BIN)
 endif
+# endif
 	
+# OBJ := $(addprefix $(ROOT)/,$(OBJ))
+# LINKOBJ := $(addprefix $(ROOT)/,$(LINKOBJ))
 
 .PHONY: all all-before all-after clean clean-custom
 
@@ -35,18 +36,6 @@ all: all-before $(BIN) all-after
 clean: clean-custom
 	$(RM_OBJ)
 	$(RM_BIN)
-	
-# TARGET_BEF = $(OBJ) $(BIN)
-# TARGET_AFT = $(foreach str, $(TARGET_BEF), "$(str)")
-# clean: clean-custom
-# 	@powershell -File Config/ShellConfig.ps1
-# 	Remove-Item -Force -Path $(TARGET_AFT)
-# clean: clean-custom
-# 	@powershell -File ShellConfig.ps1
-# 	for %i in ($(OBJ) $(BIN)) do if exist %i del /Q %i
-
-$(BIN): $(OBJ)
-	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -68,3 +57,7 @@ Source/MainMenu.o: Source/MainMenu.c
 
 Source/ExceptionHandler.o: Source/ExceptionHandler.c
 	$(CC) -c Source/ExceptionHandler.c -o Source/ExceptionHandler.o $(CFLAGS)
+	
+# Automatically Run
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)

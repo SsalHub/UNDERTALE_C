@@ -8,7 +8,7 @@
     },
     "tasks": [
         {
-            "label": "Project Total Build",
+            "label": "Build Project",
             "command": "mingw32-make",
             "group": "build",
             "args": [
@@ -27,7 +27,7 @@
             ]
         },
         {
-            "label": "Clean Build",
+            "label": "Clean Data",
             "command": "mingw32-make",
             "args": [
                 "clean",
