@@ -37,4 +37,5 @@ void mainMenu();
 void exitGame();
 
 /* Load DataFile Func */
-void loadImage(char*, char*);
+/* Returns Image's Pointer - you MUST free() it */
+char* loadImage(char*);

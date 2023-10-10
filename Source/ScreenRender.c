@@ -216,31 +216,29 @@ void renderTestScreen()
 void renderMainMenuScreen(int selected)
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tTitleColor = _GRAY_, tLogoColor = _WHITE_, tSelColor = _YELLOW_;
-	COORD titlePos = { 0, screenInfo.height * 0.36 };
+	COORD logoPos = { 0, screenInfo.height * 0.36 }, titlePos = { 0, screenInfo.height * 0.36 + 10 };
 	COORD contentPos[2], selectedPos;
 	DWORD dw;
-	char logoFName[32] = "UNDERTALE.logo";
+	char logoFName[32] = "UNDERTALE.logo", title[128];
 	char content[2][32];
-	char* title, *logo, *nextLine, *selectedChar;
+	char* logo, *nextLine, *selectedChar;
 	int i, contentPosY = screenInfo.height * 0.76;
 	
 	fillColorToScreen(bColor, tColor);
-	title = (char*)calloc(screenInfo.areaForStrlen, sizeof(char));
 	
 	/* Render Logo */
 	setColor(bColor, tLogoColor);
-	loadImage(title, logoFName);
-	nextLine = title;
+	logo = loadImage(logoFName);
+	nextLine = logo;
 	while (nextLine != NULL && *nextLine != '\n') { nextLine++; }
 	/* If error */ if (nextLine == NULL) throwFatalException(_INVALID_DATA_FORMAT_);
-	titlePos.X = (screenInfo.width - (int)(nextLine - title)) * 0.5;
-	renderString(title, titlePos);
+	logoPos.X = (screenInfo.width - (int)(nextLine - logo)) * 0.5;
+	renderString(logo, logoPos);
 	
 	/* Render Title */
 	setColor(bColor, tTitleColor);
 	sprintf(title, "19 Song JaeUk in Hansung Univ.");
 	titlePos.X = (screenInfo.width - strlen(title)) * 0.5;
-	titlePos.Y += 10;
 	renderString(title, titlePos);
     
     /* Render MainMeny Choices */
@@ -273,22 +271,20 @@ void renderMainMenuScreen(int selected)
 	SetConsoleCursorPosition(_CURRENT_SCREEN_, selectedPos);
 	WriteFile(_CURRENT_SCREEN_, selectedChar, strlen(selectedChar), &dw, NULL);
 	
-	free(title);
+	free(logo);
 }
 
 void renderBattleEnemy()
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
-	COORD pos = { 0, screenInfo.height * 0.03 };
+	COORD pos = { 0, screenInfo.height * 0.04 };
 	char enemyFName[32] = "SANS.block";
 	char* buffer, *prevLine, *nextLine;
 	int slen, maxW = 0;
 	
-	buffer = (char*)calloc(screenInfo.areaForStrlen * 0.7, sizeof(char));
-	
 	/* Render Enemy */
 	setColor(bColor, tColor);
-	loadImage(buffer, enemyFName);
+	buffer = loadImage(enemyFName);
 	pos.X = screenInfo.width * 0.3;
 	nextLine = buffer;
 	while (nextLine != NULL && *nextLine != '\0')
@@ -303,6 +299,7 @@ void renderBattleEnemy()
 	}
 	pos.X = (screenInfo.width - maxW) * 0.5;
 	renderString(buffer, pos);
+	free(buffer);
 }
 
 void renderBattleExplainBox(int currTurn)
@@ -317,11 +314,11 @@ void renderBattleExplainBox(int currTurn)
 	/* Initialize Center Box */
 	setColor(bColor, tColor);
 	centerBox[0] = '\0';
-	sprintf(centerBox,     "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ");
-	sprintf(centerBox,     "┃                                                    ┃ ");
-	sprintf(centerBox,     "┃                                                    ┃ ");
-	sprintf(centerBox,     "┃                                                    ┃ ");
-	sprintf(centerBox,     "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ");
+	strcat(centerBox, "\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ");
+	strcat(centerBox, "\n┃                                                    ┃ ");
+	strcat(centerBox, "\n┃                                                    ┃ ");
+	strcat(centerBox, "\n┃                                                    ┃ ");
+	strcat(centerBox, "\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ");
 	// Top Line
 	// sprintf(centerBox, "┏");
 	// for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
@@ -347,11 +344,11 @@ void renderBattleExplainBox(int currTurn)
 void renderBattleChoiceBoxes(int selected)
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tSelColor = _YELLOW_;
-	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.64 };
+	COORD choiceBoxPos = { screenInfo.width * 0.16, 0 };
 	DWORD dw;
 	char choiceBoxText[4][16] = { "√ FIGHT", "♣ ACT", "◈ ITEM", "♥ MERCY" };
 	char choiceBox[128];
-	int i, offset = 60;
+	int i, choiceBoxPosY = screenInfo.height * 0.6, offset = 60;
 	
 	/* choiceBox[4][currentScreenInfo.width * 7] */
 	
@@ -367,6 +364,7 @@ void renderBattleChoiceBoxes(int selected)
 		sprintf(choiceBox, "%s\n┃        %-10s      ┃ ", choiceBox, choiceBoxText[i]);
 		sprintf(choiceBox, "%s\n┗━━━━━━━━━━━━━━━━━━━━━━┛ ", choiceBox);
 		
+		choiceBoxPos.Y = choiceBoxPosY;
 		renderString(choiceBox, choiceBoxPos);
 		choiceBoxPos.X += offset;
 	}
