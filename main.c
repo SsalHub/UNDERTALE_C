@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) 
 {
 	initGame();
-	startGame();
+	mainMenu();
 		
 	return 0;
 }

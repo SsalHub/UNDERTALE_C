@@ -16,7 +16,7 @@ void initGame()
 	MoveWindow(_CURRENT_SCREEN_, 0, 0, screenInfo.width, screenInfo.height, true);
 }
 
-void startGame()
+void mainMenu()
 {
 	loadMainMenu();
 }

@@ -311,47 +311,49 @@ void renderBattleExplainBox(int currTurn)
 	const int CENTERBOX_WIDTH = screenInfo.width * 0.58, CENTERBOX_HEIGHT = screenInfo.height * 0.34;
 	COORD centerBoxPos = { (screenInfo.width - CENTERBOX_WIDTH) * 0.5, (screenInfo.height - CENTERBOX_HEIGHT) * 0.24 };
 	DWORD dw;
-	char* centerBox;
+	char centerBox[128];
 	int i, j;
-	
-	centerBox = (char*)calloc(CENTERBOX_WIDTH * CENTERBOX_HEIGHT * 1.5, sizeof(char));
 	
 	/* Initialize Center Box */
 	setColor(bColor, tColor);
+	centerBox[0] = '\0';
+	sprintf(centerBox,     "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ");
+	sprintf(centerBox,     "┃                                                    ┃ ");
+	sprintf(centerBox,     "┃                                                    ┃ ");
+	sprintf(centerBox,     "┃                                                    ┃ ");
+	sprintf(centerBox,     "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ");
 	// Top Line
-	sprintf(centerBox, "┏");
-	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
-		strcat(centerBox, "━");
-	strcat(centerBox, "┓ ");
+	// sprintf(centerBox, "┏");
+	// for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
+	// 	strcat(centerBox, "━");
+	// strcat(centerBox, "┓ ");
 	// Mid Lines
-	for (i = 0; i < CENTERBOX_HEIGHT - 2; i++)
-	{
-		strcat(centerBox, "\n┃");
-		for (j = 0; j < CENTERBOX_WIDTH - 2; j++)
-			strcat(centerBox, " ");
-		strcat(centerBox, "┃ ");
-	}
+	// for (i = 0; i < CENTERBOX_HEIGHT - 2; i++)
+	// {
+	// 	strcat(centerBox, "\n┃");
+	// 	for (j = 0; j < CENTERBOX_WIDTH - 2; j++)
+	// 		strcat(centerBox, " ");
+	// 	strcat(centerBox, "┃ ");
+	// }
 	// Bottom Line
-	strcat(centerBox, "\n┗");
-	for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
-		strcat(centerBox, "━");
-	strcat(centerBox, "┛ ");
+	// strcat(centerBox, "\n┗");
+	// for (i = 0; i < CENTERBOX_WIDTH - 2; i++)
+	// 	strcat(centerBox, "━");
+	// strcat(centerBox, "┛ ");
 	
 	renderString(centerBox, centerBoxPos);
-	free(centerBox);
 }
 
 void renderBattleChoiceBoxes(int selected)
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_, tSelColor = _YELLOW_;
-	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.88 };
+	COORD choiceBoxPos = { screenInfo.width * 0.16, screenInfo.height * 0.64 };
 	DWORD dw;
 	char choiceBoxText[4][16] = { "√ FIGHT", "♣ ACT", "◈ ITEM", "♥ MERCY" };
-	char* choiceBox;
+	char choiceBox[128];
 	int i, offset = 60;
 	
 	/* choiceBox[4][currentScreenInfo.width * 7] */
-	choiceBox = (char*)calloc(screenInfo.width * 7, sizeof(char));
 	
 	/* Initialize Chioce Boxes. */
 	for (i = 0; i < 4; i++)
@@ -360,13 +362,12 @@ void renderBattleChoiceBoxes(int selected)
 			setColor(bColor, tSelColor);
 		else
 			setColor(bColor, tColor);
-			
-		sprintf(choiceBox,     "┏━━━━━━━━━━━━━━━━━━━━━━┓ ");
+		choiceBox[0] = '\0';
+		sprintf(choiceBox, "%s\n┏━━━━━━━━━━━━━━━━━━━━━━┓ ");
 		sprintf(choiceBox, "%s\n┃        %-10s      ┃ ", choiceBox, choiceBoxText[i]);
 		sprintf(choiceBox, "%s\n┗━━━━━━━━━━━━━━━━━━━━━━┛ ", choiceBox);
 		
 		renderString(choiceBox, choiceBoxPos);
 		choiceBoxPos.X += offset;
 	}
-	free(choiceBox);
 }

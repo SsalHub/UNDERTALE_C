@@ -33,7 +33,7 @@ void test();
 
 /* Game System Func */
 void initGame();
-void startGame();
+void mainMenu();
 void exitGame();
 
 /* Load DataFile Func */
