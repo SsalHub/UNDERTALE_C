@@ -1,8 +1,13 @@
 #include "../Header/ScreenRender.h"
 
-#ifndef CONSOLE_WINDOWED_MODE
-#define CONSOLE_FULLSCREEN_MODE 	1
-#define CONSOLE_WINDOWED_MODE 		2
+#ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
+#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 	0x0004
+#endif
+#ifndef DISABLE_NEWLINE_AUTO_RETURN
+#define DISABLE_NEWLINE_AUTO_RETURN 		0x0008
+#endif
+#ifndef ENABLE_LVB_GRID_WORLDWIDE
+#define ENABLE_LVB_GRID_WORLDWIDE 			0x0010
 #endif
 
 ScreenBuffer screenBuffer;
@@ -10,17 +15,20 @@ ScreenInfo screenInfo;
 
 void initScreen()
 {
-	char screenInitCommand[64] = "";
-	sprintf(screenInitCommand, "mode con:cols=%d lines=%d", _SCREEN_WIDTH_, _SCREEN_HEIGHT_);
 	CONSOLE_SCREEN_BUFFER_INFO info;
+	SMALL_RECT rect = {0, 0, _SCREEN_WIDTH_, _SCREEN_HEIGHT_}; 
 	
-	/* Basic initialization */
-	system(screenInitCommand);
+	/* Create Screen Buffer */
+	SetConsoleOutputCP(CP_UTF8);	// Set output encoding UTF-8  
 	screenBuffer.currentIndex = 0;
 	screenBuffer.buffer[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	screenBuffer.buffer[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	SetConsoleDisplayMode(screenBuffer.buffer[0], CONSOLE_WINDOWED_MODE, 0);
-	SetConsoleDisplayMode(screenBuffer.buffer[1], CONSOLE_WINDOWED_MODE, 0);
+
+	/* Initialize Screen */
+    SetConsoleWindowInfo(screenBuffer.buffer[0], TRUE, &rect);
+    SetConsoleWindowInfo(screenBuffer.buffer[1], TRUE, &rect);
+	SetConsoleMode(screenBuffer.buffer[0], ENABLE_PROCESSED_OUTPUT | ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN | ENABLE_LVB_GRID_WORLDWIDE);
+	SetConsoleMode(screenBuffer.buffer[1], ENABLE_PROCESSED_OUTPUT | ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN | ENABLE_LVB_GRID_WORLDWIDE);
 
 	GetConsoleScreenBufferInfo(_CURRENT_SCREEN_, &info);
     screenInfo.width = info.srWindow.Right - info.srWindow.Left + 1;
@@ -33,14 +41,6 @@ void initScreen()
 	cursor.bVisible = false;
 	SetConsoleCursorInfo(screenBuffer.buffer[0], &cursor);
 	SetConsoleCursorInfo(screenBuffer.buffer[1], &cursor);
-	
-	/* Font init */
-	CONSOLE_FONT_INFO font;
-	font.nFont = 2;
-    font.dwFontSize.X = _FONT_WIDTH_;
-    font.dwFontSize.Y = _FONT_HEIGHT_;
-    SetCurrentConsoleFontEx(screenBuffer.buffer[0], false, &font);
-    SetCurrentConsoleFontEx(screenBuffer.buffer[1], false, &font);
 }
 
 void vibrateScreen()

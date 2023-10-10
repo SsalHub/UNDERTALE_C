@@ -12,10 +12,8 @@
 #include "ExceptionHandler.h"
 
 
-#define 	_SCREEN_WIDTH_ 			230
-#define 	_SCREEN_HEIGHT_ 		80
-#define		_FONT_WIDTH_			6
-#define		_FONT_HEIGHT_			12
+#define 	_SCREEN_WIDTH_ 			180
+#define 	_SCREEN_HEIGHT_ 		50
 
 typedef enum BattleChoiceType
 {

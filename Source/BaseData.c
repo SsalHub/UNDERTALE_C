@@ -13,7 +13,7 @@ void test()
 void initGame()
 {
 	initScreen();
-	MoveWindow(_CURRENT_SCREEN_, 2, 2, screenInfo.width, screenInfo.height, true);
+	MoveWindow(_CURRENT_SCREEN_, 0, 0, screenInfo.width, screenInfo.height, true);
 }
 
 void startGame()

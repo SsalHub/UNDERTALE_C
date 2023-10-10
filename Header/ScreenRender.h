@@ -7,7 +7,7 @@
 #include <wchar.h>
 #include <stdbool.h>
 #include <windows.h>
-#include <Wincon.h>
+#include <wincon.h>
 
 #include "BaseData.h"
 #include "ExceptionHandler.h"

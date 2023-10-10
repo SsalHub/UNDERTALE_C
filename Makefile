@@ -10,7 +10,7 @@ INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include"
 CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++"
 BIN      = Undertale.exe
 CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+CFLAGS   = $(INCS)
 
 # ifdef ComSpec	# True, PowerShell
 # # @powershell -File "$(ROOT)/Config/ShellConfig.ps1"
@@ -20,10 +20,10 @@ CFLAGS   = $(INCS)
 # 	endif
 # else			# False, CommandPrompt
 # @call $(ROOT)/Config/PromptConfig.ps1
-RM_OBJ := for /r %i in (*.o) do del "%i"
-ifneq ($(wildcard $(BIN)),)
-	RM_BIN := rm -rf $(BIN)
-endif
+# RM_OBJ := for /r %i in (*.o) do del "%i"
+# ifneq ($(wildcard $(BIN)),)
+# 	RM_BIN := del  $(BIN)
+# endif
 # endif
 	
 # OBJ := $(addprefix $(ROOT)/,$(OBJ))
@@ -34,6 +34,7 @@ endif
 all: all-before $(BIN) all-after
 
 clean: clean-custom
+	del /s *.o
 	$(RM_OBJ)
 	$(RM_BIN)
 
