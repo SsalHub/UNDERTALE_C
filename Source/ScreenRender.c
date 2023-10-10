@@ -308,8 +308,8 @@ void renderBattleEnemy()
 void renderBattleExplainBox(int currTurn)
 {
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
-	const int CENTERBOX_WIDTH = screenInfo.width * 0.78, CENTERBOX_HEIGHT = screenInfo.height * 0.4;
-	COORD centerBoxPos = { (screenInfo.width - CENTERBOX_WIDTH) * 0.5, (screenInfo.height - CENTERBOX_HEIGHT) * 0.64 };
+	const int CENTERBOX_WIDTH = screenInfo.width * 0.58, CENTERBOX_HEIGHT = screenInfo.height * 0.34;
+	COORD centerBoxPos = { (screenInfo.width - CENTERBOX_WIDTH) * 0.5, (screenInfo.height - CENTERBOX_HEIGHT) * 0.24 };
 	DWORD dw;
 	char* centerBox;
 	int i, j;
@@ -361,11 +361,9 @@ void renderBattleChoiceBoxes(int selected)
 		else
 			setColor(bColor, tColor);
 			
-		sprintf(choiceBox,     "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ ");
-		sprintf(choiceBox, "%s\n┃                                ┃ ", choiceBox);
-		sprintf(choiceBox, "%s\n┃            %-10s          ┃  ", choiceBox, choiceBoxText[i]);
-		sprintf(choiceBox, "%s\n┃                                ┃ ", choiceBox);
-		sprintf(choiceBox, "%s\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ ", choiceBox);
+		sprintf(choiceBox,     "┏━━━━━━━━━━━━━━━━━━━━━━┓ ");
+		sprintf(choiceBox, "%s\n┃        %-10s      ┃ ", choiceBox, choiceBoxText[i]);
+		sprintf(choiceBox, "%s\n┗━━━━━━━━━━━━━━━━━━━━━━┛ ", choiceBox);
 		
 		renderString(choiceBox, choiceBoxPos);
 		choiceBoxPos.X += offset;
