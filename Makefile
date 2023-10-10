@@ -29,14 +29,16 @@ CFLAGS   = $(INCS)
 # OBJ := $(addprefix $(ROOT)/,$(OBJ))
 # LINKOBJ := $(addprefix $(ROOT)/,$(LINKOBJ))
 
-.PHONY: all all-before all-after clean clean-custom
+.PHONY: all all-before all-after setup clean clean-custom
 
-all: all-before $(BIN) all-after
+setup: all-before $(BIN) all-after
 
 clean: clean-custom
 	del /s *.o
 	$(RM_OBJ)
 	$(RM_BIN)
+
+all: clean setup 
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)

@@ -4,6 +4,7 @@
 #include <windows.h>
 
 #include "BaseData.h"
+#include "ScreenRender.h"
 
 typedef enum ExceptionType
 {
@@ -13,3 +14,4 @@ typedef enum ExceptionType
 } ExceptionType;
 
 void throwFatalException(ExceptionType);
+void renderErrorScreen();
