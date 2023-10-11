@@ -279,27 +279,29 @@ void renderBattleEnemy()
 	ConsoleColor bColor = _BLACK_, tColor = _WHITE_;
 	COORD pos = { 0, screenInfo.height * 0.04 };
 	char enemyFName[32] = "SANS.block";
-	char* buffer, *prevLine, *nextLine;
+	char *buffer, *line, *searchNewLine;
 	int slen, maxW = 0;
 	
 	/* Render Enemy */
 	setColor(bColor, tColor);
 	buffer = loadImage(enemyFName);
+	line = (char*)calloc(screenInfo.width, sizeof(char));
+	line = buffer;
 	pos.X = screenInfo.width * 0.3;
-	nextLine = buffer;
-	while (nextLine != NULL && *nextLine != '\0')
+	while (line != NULL && *line != '\0')
 	{
-		prevLine = nextLine;
-		while (nextLine != NULL && *nextLine != '\n') 
-		{
-			nextLine++;
-		}
-		maxW = (int)(nextLine - prevLine) < maxW ? maxW : (int)(nextLine - prevLine);
-		nextLine++;
+		searchNewLine = line;
+		while (searchNewLine != NULL && *searchNewLine != '\n')  searchNewLine++;
+		memcpy(line, line, (searchNewLine - line) * sizeof(char));
+		slen = strlen(line);
+		maxW = slen < maxW ? maxW : slen;
+		line = searchNewLine + 1;
 	}
 	pos.X = (screenInfo.width - maxW) * 0.5;
 	renderString(buffer, pos);
+
 	free(buffer);
+	free(line);
 }
 
 void renderBattleExplainBox(int currTurn)
