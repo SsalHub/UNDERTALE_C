@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <windows.h>
 
-#include "BaseData.h"
-#include "ScreenRender.h"
+#include <BaseData.h>
+#include <ScreenRender.h>
 
 typedef enum ExceptionType
 {

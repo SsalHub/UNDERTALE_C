@@ -9,8 +9,8 @@
 #include <windows.h>
 #include <wincon.h>
 
-#include "BaseData.h"
-#include "ExceptionHandler.h"
+#include <BaseData.h>
+#include <ExceptionHandler.h>
 
 #define _CURRENT_SCREEN_ screenBuffer.buffer[screenBuffer.currentIndex]
 

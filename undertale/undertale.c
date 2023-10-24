@@ -1,4 +1,5 @@
-#include "./Header/BaseData.h" 
+#include <BaseData.h>
+#include <MainMenu.h>
 
 int main(int argc, char *argv[]) 
 {

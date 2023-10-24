@@ -3,31 +3,14 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Source/BaseData.o Source/ScreenRender.o Source/PlayGame.o Source/UtilData.o Source/MainMenu.o Source/ExceptionHandler.o
-LINKOBJ  = main.o Source/BaseData.o Source/ScreenRender.o Source/PlayGame.o Source/UtilData.o Source/MainMenu.o Source/ExceptionHandler.o
+OBJ      = undertale/undertale.o undertale/PlayGame.o undertale/MainMenu.o utils/BaseData.o utils/ScreenRender.o utils/UtilData.o utils/ExceptionHandler.o
+LINKOBJ  = undertale/undertale.o undertale/PlayGame.o undertale/MainMenu.o utils/BaseData.o utils/ScreenRender.o utils/UtilData.o utils/ExceptionHandler.o
 LIBS     = -L"C:/MinGW/lib" -static-libgcc -lkernel32
-INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include"
+INCS     = -I"C:/MinGW/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"./undertale" -I"./utils"
 CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++"
-BIN      = Undertale.exe
+BIN      = undertale.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS)
-
-# ifdef ComSpec	# True, PowerShell
-# # @powershell -File "$(ROOT)/Config/ShellConfig.ps1"
-# 	RM_OBJ := Remove-Item -Force -Recurse -Filter "*.o"
-# 	ifneq ($(wildcard $(BIN)),)
-# 		RM_BIN := Remove-Item -Force $(BIN)
-# 	endif
-# else			# False, CommandPrompt
-# @call $(ROOT)/Config/PromptConfig.ps1
-# RM_OBJ := for /r %i in (*.o) do del "%i"
-# ifneq ($(wildcard $(BIN)),)
-# 	RM_BIN := del  $(BIN)
-# endif
-# endif
-	
-# OBJ := $(addprefix $(ROOT)/,$(OBJ))
-# LINKOBJ := $(addprefix $(ROOT)/,$(LINKOBJ))
 
 .PHONY: all all-before all-after setup clean clean-custom
 
@@ -40,26 +23,26 @@ clean: clean-custom
 
 all: clean setup 
 
-main.o: main.c
-	$(CC) -c main.c -o main.o $(CFLAGS)
+undertale/undertale.o: undertale/undertale.c
+	$(CC) -c undertale/undertale.c -o undertale/undertale.o $(CFLAGS)
 
-Source/BaseData.o: Source/BaseData.c
-	$(CC) -c Source/BaseData.c -o Source/BaseData.o $(CFLAGS)
+undertale/PlayGame.o: undertale/PlayGame.c
+	$(CC) -c undertale/PlayGame.c -o undertale/PlayGame.o $(CFLAGS)
 
-Source/ScreenRender.o: Source/ScreenRender.c
-	$(CC) -c Source/ScreenRender.c -o Source/ScreenRender.o $(CFLAGS)
+undertale/MainMenu.o: undertale/MainMenu.c
+	$(CC) -c undertale/MainMenu.c -o undertale/MainMenu.o $(CFLAGS)
 
-Source/PlayGame.o: Source/PlayGame.c
-	$(CC) -c Source/PlayGame.c -o Source/PlayGame.o $(CFLAGS)
+utils/BaseData.o: utils/BaseData.c
+	$(CC) -c utils/BaseData.c -o utils/BaseData.o $(CFLAGS)
 
-Source/UtilData.o: Source/UtilData.c
-	$(CC) -c Source/UtilData.c -o Source/UtilData.o $(CFLAGS)
+utils/ScreenRender.o: utils/ScreenRender.c
+	$(CC) -c utils/ScreenRender.c -o utils/ScreenRender.o $(CFLAGS)
 
-Source/MainMenu.o: Source/MainMenu.c
-	$(CC) -c Source/MainMenu.c -o Source/MainMenu.o $(CFLAGS)
+utils/UtilData.o: utils/UtilData.c
+	$(CC) -c utils/UtilData.c -o utils/UtilData.o $(CFLAGS)
 
-Source/ExceptionHandler.o: Source/ExceptionHandler.c
-	$(CC) -c Source/ExceptionHandler.c -o Source/ExceptionHandler.o $(CFLAGS)
+utils/ExceptionHandler.o: utils/ExceptionHandler.c
+	$(CC) -c utils/ExceptionHandler.c -o utils/ExceptionHandler.o $(CFLAGS)
 	
 # Automatically Run
 $(BIN): $(OBJ)

@@ -1,4 +1,4 @@
-#include "../Header/PlayGame.h"
+#include <PlayGame.h>
 
 void playGame()
 {

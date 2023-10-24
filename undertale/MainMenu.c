@@ -1,4 +1,4 @@
-#include "../Header/MainMenu.h"
+#include <MainMenu.h>
 
 void loadMainMenu()
 {

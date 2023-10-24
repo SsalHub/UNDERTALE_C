@@ -6,10 +6,10 @@
 #include <direct.h>
 #include <Windows.h>
 
-#include "UtilData.h"
-#include "MainMenu.h"
-#include "ScreenRender.h"
-#include "ExceptionHandler.h"
+#include <UtilData.h>
+#include <MainMenu.h>
+#include <ScreenRender.h>
+#include <ExceptionHandler.h>
 
 
 #define 	_SCREEN_WIDTH_ 			180

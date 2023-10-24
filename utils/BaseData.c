@@ -1,4 +1,4 @@
-#include "../Header/BaseData.h"
+#include <BaseData.h>
 
 /* Test Func */
 
@@ -38,7 +38,7 @@ char* loadImage(char* fname)
 	
 	/* Search File Path */
 	_getcwd(rootPath, 1000);
-	sprintf(imagePath, "%s\\Image\\%s", rootPath, fname);
+	sprintf(imagePath, "%s\\images\\%s", rootPath, fname);
 	
 	/* Load File */
 	fp = fopen(imagePath, "r");
