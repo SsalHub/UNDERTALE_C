@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.ejs": "html",
-        "screenrender.h": "c",
-        "exceptionhandler.h": "c",
-        "basedata.h": "c"
-    }
-}

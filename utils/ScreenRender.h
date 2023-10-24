@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _SCREENRENDER_
+#define _SCREENRENDER_
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -52,3 +53,4 @@ void renderBattleEnemy();
 void renderBattleExplainBox(int);
 void renderBattleChoiceBoxes(int);
 
+#endif

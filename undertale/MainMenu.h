@@ -1,4 +1,5 @@
-
+#ifndef _MAINMENU_
+#define _MAINMENU_
 
 #include <conio.h>
 
@@ -8,3 +9,5 @@
 
 void loadMainMenu();
 int runMainMenu();
+
+#endif

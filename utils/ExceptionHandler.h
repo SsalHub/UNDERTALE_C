@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EXCEPTIONHANDLER_
+#define _EXCEPTIONHANDLER_
 
 #include <stdio.h>
 #include <windows.h>
@@ -15,3 +16,5 @@ typedef enum ExceptionType
 
 void throwFatalException(ExceptionType);
 void renderErrorScreen();
+
+#endif

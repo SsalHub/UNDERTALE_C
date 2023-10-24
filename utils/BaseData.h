@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _BASEDATA_
+#define _BASEDATA_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,3 +40,5 @@ void exitGame();
 /* Load DataFile Func */
 /* Returns Image's Pointer - you MUST free() it */
 char* loadImage(char*);
+
+#endif

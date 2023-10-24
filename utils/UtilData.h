@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _UTILDATA_
+#define _UTILDATA_
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -95,3 +96,5 @@ typedef enum InputType
 
 /* Equals like Sleep(int) or usleep(ms) */
 void WaitForSeconds(float s);
+
+#endif

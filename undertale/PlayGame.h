@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _PLAYGAME_
+#define _PLAYGAME_
 
 #include <stdio.h>
 #include <conio.h>
@@ -9,3 +10,5 @@
 
 void playGame();
 void battle();
+
+#endif
